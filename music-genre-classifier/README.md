@@ -1,274 +1,334 @@
-# 🎵 Music Genre Classification using CNN
+# 🎵 Music Genre Classifier - Web App
 
-A deep learning project that classifies music into 10 different genres using Convolutional Neural Networks (CNN) trained on mel-spectrogram features.
+A beautiful, interactive web application for classifying music genres using deep learning!
 
-## 📋 Project Overview
+![Music Genre Classifier](https://img.shields.io/badge/Python-3.8+-blue.svg)
+![Streamlit](https://img.shields.io/badge/Streamlit-1.29.0-red.svg)
+![TensorFlow](https://img.shields.io/badge/TensorFlow-2.15.0-orange.svg)
 
-This project implements a music genre classifier using:
-- **Deep Learning**: CNN architecture with 4 convolutional blocks
-- **Audio Processing**: Mel-spectrogram feature extraction using librosa
-- **Dataset**: GTZAN Dataset (1000 audio files, 10 genres)
-- **Interface**: Interactive Streamlit web application
+## ✨ Features
 
-## 🎯 Genres Supported
+- 🎨 **Beautiful Gradient UI** - Eye-catching purple gradient design
+- 🎯 **Real-time Classification** - Instant genre prediction
+- 📊 **Interactive Visualizations** - Waveform & spectrogram plots
+- 🎼 **Audio Feature Analysis** - Tempo, brightness, energy metrics
+- 📈 **Confidence Scores** - See prediction probabilities for all genres
+- 🎧 **Audio Preview** - Listen to your uploaded music
+- 🏆 **Top 3 Predictions** - View alternative genre possibilities
 
-The model classifies music into 10 genres:
-- Blues
-- Classical
-- Country
-- Disco
-- Hip-hop
-- Jazz
-- Metal
-- Pop
-- Reggae
-- Rock
+## 🎭 Supported Genres
 
-## 🏗️ Model Architecture
+- 🎸 Blues
+- 🎻 Classical
+- 🤠 Country
+- 🕺 Disco
+- 🎤 Hip Hop
+- 🎷 Jazz
+- 🤘 Metal
+- 🎵 Pop
+- 🏝️ Reggae
+- 🎸 Rock
 
-### CNN Structure:
-```
-Input (128 x 1293 x 1) - Mel-spectrogram
-    ↓
-Conv2D(32) → BatchNorm → ReLU → MaxPool → Dropout(0.25)
-    ↓
-Conv2D(64) → BatchNorm → ReLU → MaxPool → Dropout(0.25)
-    ↓
-Conv2D(128) → BatchNorm → ReLU → MaxPool → Dropout(0.25)
-    ↓
-Conv2D(256) → BatchNorm → ReLU → MaxPool → Dropout(0.3)
-    ↓
-Flatten → Dense(256) → Dropout(0.5)
-    ↓
-Dense(128) → Dropout(0.4)
-    ↓
-Dense(10, softmax) - Output
-```
+## 🚀 Quick Start
 
-### Training Details:
-- **Optimizer**: Adam (lr=0.001)
-- **Loss**: Categorical Crossentropy
-- **Batch Size**: 32
-- **Epochs**: 50 (with early stopping)
-- **Data Split**: 70% train, 15% validation, 15% test
+### Prerequisites
+
+- Python 3.8 or higher
+- Trained model files:
+  - `music_genre_classifier_model.h5`
+  - `label_encoder.pkl`
+
+### Installation
+
+1. **Clone or navigate to the directory:**
+   ```bash
+   cd music-genre-classifier
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   pip install -r requirements_app.txt
+   ```
+
+3. **Ensure model files are present:**
+   ```
+   music-genre-classifier/
+   ├── app.py
+   ├── music_genre_classifier_model.h5  ← Required
+   ├── label_encoder.pkl                 ← Required
+   └── requirements_app.txt
+   ```
+
+### Running the App
+
+1. **Start the Streamlit server:**
+   ```bash
+   streamlit run app.py
+   ```
+
+2. **Open your browser:**
+   - The app will automatically open at `http://localhost:8501`
+   - If not, navigate to the URL shown in terminal
+
+3. **Upload and classify:**
+   - Click "Browse files" or drag & drop an audio file
+   - Supported formats: `.wav`, `.mp3`, `.ogg`, `.flac`
+   - Click "🎯 Classify Genre" button
+   - View predictions and visualizations!
+
+## 📸 Screenshots
+
+### Main Interface
+- Beautiful purple gradient background
+- Drag & drop file upload
+- Real-time audio preview
+
+### Prediction Results
+- Large, bold genre prediction
+- Confidence percentage
+- Interactive confidence chart for all genres
+
+### Audio Analysis
+- Waveform visualization
+- Mel spectrogram heatmap
+- Audio feature metrics (Tempo, Brightness, Energy, etc.)
+
+## 🎯 How It Works
+
+1. **Upload Audio** - User uploads a music file
+2. **Feature Extraction** - Extract mel-spectrogram features using librosa
+3. **Deep Learning Prediction** - LSTM with Attention model processes features
+4. **Results Display** - Show predicted genre with confidence scores
+5. **Visualizations** - Display waveforms, spectrograms, and audio metrics
+
+## 🧠 Model Architecture
+
+- **Type:** Bidirectional LSTM with Attention Mechanism
+- **Input:** Mel-spectrogram features (128 x 174)
+- **Layers:**
+  - 3 Bidirectional LSTM layers (256, 128, 64 units)
+  - Custom attention mechanism
+  - Batch normalization
+  - Dropout regularization
+- **Output:** 10 genre probabilities
+- **Accuracy:** ~75-85% on test set
+
+## 📊 Audio Features Displayed
+
+| Feature | Description |
+|---------|-------------|
+| **Tempo** | Beats per minute (BPM) |
+| **Brightness** | Spectral centroid (Hz) |
+| **Rolloff** | Spectral rolloff frequency (Hz) |
+| **ZCR** | Zero crossing rate |
+| **Energy** | RMS energy level |
+
+## 🎨 UI Features
+
+### Color Scheme
+- Primary: Purple gradient (`#667eea` to `#764ba2`)
+- Accent: Pink gradient for predictions
+- Genre colors: Each genre has unique color
+
+### Interactive Elements
+- Hover effects on buttons
+- Animated transitions
+- Responsive design
+- Dark theme charts
+
+### Customization
+You can customize the UI by modifying the CSS in `app.py`:
+- Change gradient colors
+- Adjust card styles
+- Modify chart themes
 
 ## 📁 Project Structure
 
 ```
 music-genre-classifier/
-│
-├── ModelTraining.ipynb          # Complete training pipeline
-├── app.py                        # Streamlit web application
-├── requirements.txt              # Python dependencies
-│
-├── data/                         # Dataset directory
-│   └── (GTZAN dataset goes here)
-│
-├── models/                       # Saved models
-│   ├── music_genre_cnn.h5       # Trained model
-│   └── label_encoder.npy        # Label encoder
-│
-└── utils/                        # Utility scripts
+├── app.py                              # Streamlit web application
+├── music_genre_classifier_model.h5     # Trained LSTM model
+├── label_encoder.pkl                   # Genre label encoder
+├── requirements_app.txt                # Python dependencies
+├── README_APP.md                       # This file
+└── sample_music/                       # (Optional) Sample audio files
 ```
 
-## 🚀 Getting Started
+## 🔧 Configuration
 
-### 1. Install Dependencies
+### Sidebar Settings
+- **Show Visualizations** - Toggle waveform/spectrogram plots
+- **Show Audio Features** - Toggle feature metrics display
+
+### Model Parameters
+To use a different model:
+1. Update model path in `load_model_and_encoder()` function
+2. Ensure label encoder matches model classes
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+**❌ "Error loading model"**
+- Ensure `music_genre_classifier_model.h5` is in the same directory as `app.py`
+- Check file permissions
+
+**❌ "Error extracting features"**
+- Verify audio file is not corrupted
+- Try converting to .wav format
+- Ensure file duration is at least 3 seconds
+
+**❌ "Module not found"**
+- Run: `pip install -r requirements_app.txt`
+- Ensure you're in the correct Python environment
+
+**❌ App loads slowly**
+- First load caches the model (takes ~5-10 seconds)
+- Subsequent predictions are fast
+
+### Performance Tips
+
+1. **Use GPU:** If available, TensorFlow will automatically use GPU
+2. **File Size:** Smaller files (<10MB) process faster
+3. **Format:** WAV files process slightly faster than MP3
+
+## 🌐 Deployment
+
+### Deploy to Streamlit Cloud
+
+1. **Push to GitHub:**
+   ```bash
+   git add .
+   git commit -m "Add web app"
+   git push
+   ```
+
+2. **Deploy on Streamlit Cloud:**
+   - Go to [share.streamlit.io](https://share.streamlit.io)
+   - Connect your GitHub repository
+   - Select `app.py` as main file
+   - Deploy!
+
+3. **Important:** Upload model files to GitHub LFS or use cloud storage
+
+### Deploy Locally with ngrok
 
 ```bash
-pip install -r requirements.txt
+# Install ngrok
+pip install pyngrok
+
+# Run app with public URL
+streamlit run app.py & ngrok http 8501
 ```
 
-**Required packages:**
-- numpy
-- librosa
-- tensorflow
-- scikit-learn
-- matplotlib
-- streamlit
-- soundfile
-- pandas
-- seaborn
+## 📦 Dependencies
 
-### 2. Download Dataset
+| Package | Version | Purpose |
+|---------|---------|---------|
+| streamlit | 1.29.0 | Web framework |
+| tensorflow | 2.15.0 | Model inference |
+| librosa | 0.10.1 | Audio processing |
+| plotly | 5.18.0 | Interactive charts |
+| numpy | 1.24.3 | Numerical operations |
+| pandas | 2.1.4 | Data handling |
+| scikit-learn | 1.3.2 | Label encoding |
 
-Download the GTZAN dataset from Kaggle:
+## 🎓 Usage Examples
 
-**Option 1: Using Kaggle API**
+### Example 1: Classify a Song
 ```bash
-# Install Kaggle CLI
-pip install kaggle
-
-# Download dataset
-kaggle datasets download -d andradaolteanu/gtzan-dataset-music-genre-classification
-
-# Unzip to project directory
-unzip gtzan-dataset-music-genre-classification.zip -d data/
-```
-
-**Option 2: Manual Download**
-1. Visit: https://www.kaggle.com/datasets/andradaolteanu/gtzan-dataset-music-genre-classification
-2. Download and extract to `data/` folder
-
-### 3. Train the Model
-
-Open and run the Jupyter notebook:
-
-```bash
-jupyter notebook ModelTraining.ipynb
-```
-
-**Training steps in the notebook:**
-1. Import libraries
-2. Load and explore dataset
-3. Extract mel-spectrogram features
-4. Build CNN model
-5. Train with callbacks (early stopping, model checkpoint)
-6. Evaluate performance
-7. Visualize results (confusion matrix, accuracy plots)
-
-**Expected training time:** 15-30 minutes (depends on hardware)
-
-### 4. Run the Web Application
-
-```bash
+# Start app
 streamlit run app.py
+
+# In browser:
+1. Upload "jazz_song.wav"
+2. Click "Classify Genre"
+3. See result: "🎷 JAZZ" with 87.3% confidence
 ```
 
-This will launch an interactive web interface where you can:
-- Upload audio files (WAV, MP3, OGG, FLAC)
-- Get instant genre predictions
-- View confidence scores for all genres
-- Visualize mel-spectrogram
+### Example 2: Compare Genres
+```bash
+# Upload multiple files in succession
+# Compare prediction confidence charts
+# Analyze audio features side-by-side
+```
 
-## 📊 Feature Extraction
+## 🚀 Advanced Features
 
-The model uses **mel-spectrograms** as input features:
-
-- **Mel-spectrogram**: Represents audio frequency content over time
-- **Dimensions**: 128 mel bands × 1293 time frames
-- **Normalization**: Scaled to [0, 1] range
-- **Advantages**: Captures both temporal and spectral information
-
-## 🎯 Model Performance
-
-Expected performance metrics:
-- **Test Accuracy**: ~75-85% (typical for GTZAN)
-- **Training Time**: 15-30 minutes
-- **Inference Time**: <1 second per audio file
-
-Performance varies by genre:
-- High accuracy: Classical, Metal, Jazz
-- Challenging: Rock vs Metal, Pop vs Disco
-
-## 🔧 Customization
-
-### Modify Model Architecture
-Edit the `build_cnn_model()` function in the notebook:
+### Custom Model
+Replace the model with your own:
 ```python
-def build_cnn_model(input_shape, num_classes):
-    # Add/remove layers
-    # Change filter sizes
-    # Adjust dropout rates
+# In app.py, modify:
+model = tf.keras.models.load_model('your_model.h5')
 ```
 
-### Change Audio Parameters
+### Add New Genres
+Update genre mappings:
 ```python
-SAMPLE_RATE = 22050  # Audio sampling rate
-DURATION = 30        # Audio duration in seconds
-N_MELS = 128        # Number of mel bands
+GENRE_EMOJIS = {
+    'your_genre': '🎵',
+    # ... existing genres
+}
 ```
 
-### Adjust Training Settings
+### Export Results
+Add export functionality:
 ```python
-EPOCHS = 50
-BATCH_SIZE = 32
-LEARNING_RATE = 0.001
+# Export predictions to CSV
+results_df.to_csv('predictions.csv')
 ```
 
-## 📈 Results Visualization
+## 📈 Performance
 
-The notebook includes:
-1. **Training History Plots**: Accuracy and loss over epochs
-2. **Confusion Matrix**: Shows prediction patterns
-3. **Per-Genre Accuracy**: Individual genre performance
-4. **Sample Predictions**: Test on specific audio files
+- **Prediction Time:** ~1-2 seconds per file
+- **Supported File Size:** Up to 50 MB
+- **Concurrent Users:** Depends on hosting
+- **Model Accuracy:** ~75-85%
 
-## 🎓 Learning Outcomes
+## 🔒 Security Notes
 
-This project demonstrates:
-- ✅ Audio signal processing with librosa
-- ✅ CNN architecture for time-series data
-- ✅ Transfer learning concepts (spectrograms as images)
-- ✅ Model evaluation and visualization
-- ✅ Deployment with Streamlit
-- ✅ End-to-end ML pipeline (data → model → deployment)
-
-## 🛠️ Troubleshooting
-
-**Issue**: Low accuracy
-- Solution: Train for more epochs, increase model capacity, or use data augmentation
-
-**Issue**: Overfitting
-- Solution: Increase dropout rates, add more data, or use regularization
-
-**Issue**: Audio loading errors
-- Solution: Ensure librosa and soundfile are properly installed
-
-**Issue**: GPU not detected
-- Solution: Install tensorflow-gpu or use CPU (slower but works)
-
-## 📚 Dataset Information
-
-**GTZAN Dataset:**
-- **Size**: ~1.2 GB
-- **Format**: WAV files (mono, 22050 Hz)
-- **Duration**: 30 seconds per track
-- **Total tracks**: 1000 (100 per genre)
-- **Source**: Collected by George Tzanetakis
-
-## 🚀 Future Improvements
-
-Potential enhancements:
-- [ ] Data augmentation (pitch shift, time stretch)
-- [ ] Use MFCCs alongside mel-spectrograms
-- [ ] Try recurrent layers (LSTM/GRU)
-- [ ] Implement attention mechanisms
-- [ ] Test on other datasets (FMA, Million Song Dataset)
-- [ ] Real-time audio streaming classification
-- [ ] Mobile app deployment
-
-## 📝 Requirements
-
-```
-Python 3.8+
-TensorFlow 2.x
-librosa
-scikit-learn
-matplotlib
-streamlit
-```
+- Temporary files are automatically deleted
+- No data is stored permanently
+- Upload files are processed in memory
+- Model runs locally (no external API calls)
 
 ## 🤝 Contributing
 
-Feel free to:
-- Report bugs
-- Suggest features
-- Improve documentation
-- Optimize model architecture
+Want to improve the app? Here are some ideas:
 
-## 📄 License
+- [ ] Add batch processing for multiple files
+- [ ] Export predictions to CSV/JSON
+- [ ] Add more audio visualizations
+- [ ] Implement genre comparison mode
+- [ ] Add dark/light theme toggle
+- [ ] Support for longer audio files
+- [ ] Add confidence threshold settings
 
-This project uses the GTZAN dataset for educational purposes.
+## 📝 License
+
+This project uses the GTZAN dataset and is for educational purposes.
 
 ## 🙏 Acknowledgments
 
-- GTZAN Dataset: George Tzanetakis
-- Librosa: Audio processing library
-- TensorFlow/Keras: Deep learning framework
+- **GTZAN Dataset** - Music genre classification dataset
+- **Streamlit** - Amazing web framework
+- **TensorFlow** - Deep learning library
+- **Librosa** - Audio processing library
+
+## 📞 Support
+
+Having issues? Try these:
+1. Check the troubleshooting section above
+2. Ensure all dependencies are installed
+3. Verify model files are present
+4. Check Python version (3.8+)
+
+## 🎉 Enjoy!
+
+Upload your favorite songs and discover their genres with AI! 🎵🤖
 
 ---
 
-**Built with ❤️ using TensorFlow and Librosa**
+**Made with ❤️ using Streamlit & TensorFlow**
 
-⭐ Star this project if you found it helpful!
+*Last Updated: December 6, 2025*
