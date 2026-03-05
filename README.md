@@ -8,6 +8,16 @@ A deep learning project that classifies music into 10 different genres using a C
 
 ---
 
+# 🌐 View Application
+
+🚀 **Try the Live Application**
+
+👉 **[View Application](https://musicgenreclassifier99.streamlit.app/)**
+
+Upload any music file and instantly classify its genre using the trained deep learning model.
+
+---
+
 ## 📖 Project Overview
 
 This project uses deep learning to automatically identify music genres. It includes:
@@ -43,8 +53,10 @@ Before starting, make sure you have:
   - Dataset auto-downloads in the notebook
 
 ### 4. Model Files (For Web App)
+
 The repository includes:
-- `music_genre_classifier_model.h5` - Pre-trained model
+
+- `music_genre_classifier_model.h5` - Pre-trained model  
 - `label_encoder.pkl` - Label encoder for genres
 
 ---
@@ -54,29 +66,37 @@ The repository includes:
 ### Step 1: Clone the Repository
 
 **Option A: Using Git**
+
 ```bash
 git clone https://github.com/Deekshith1983/MusicGenreClassifier.git
 cd MusicGenreClassifier/music-genre-classifier
 ```
 
 **Option B: Download ZIP**
-- Click "Code" → "Download ZIP" on GitHub
+
+- Click **Code → Download ZIP** on GitHub
 - Extract the ZIP file
 - Open terminal/command prompt in the `music-genre-classifier` folder
 
+---
+
 ### Step 2: Create Virtual Environment (Recommended)
 
-**Windows:**
+**Windows**
+
 ```powershell
 python -m venv venv
 .\venv\Scripts\Activate.ps1
 ```
 
-**macOS/Linux:**
+**macOS/Linux**
+
 ```bash
 python3 -m venv venv
 source venv/bin/activate
 ```
+
+---
 
 ### Step 3: Install Dependencies
 
@@ -85,164 +105,231 @@ pip install -r requirements_app.txt
 ```
 
 This installs all required packages:
+
 - Streamlit (web interface)
 - TensorFlow (deep learning)
 - Librosa (audio processing)
 - Plotly (visualizations)
 - And other dependencies
 
-**Installation takes 5-10 minutes depending on your internet speed.**
+**Installation takes 5–10 minutes depending on your internet speed.**
 
 ---
 
-## 🎯 Running the Project
+# 🎯 Running the Project
 
-### Option 1: Run the Web App (Quick Start)
+## Option 1: Run the Web App (Quick Start)
 
-1. **Navigate to project folder:**
-   ```bash
-   cd music-genre-classifier
-   ```
+1️⃣ **Navigate to project folder**
 
-2. **Activate virtual environment** (if not already active):
-   ```bash
-   # Windows
-   .\venv\Scripts\Activate.ps1
-   
-   # macOS/Linux
-   source venv/bin/activate
-   ```
+```bash
+cd music-genre-classifier
+```
 
-3. **Start the app:**
-   ```bash
-   streamlit run app.py
-   ```
+2️⃣ **Activate virtual environment**
 
-4. **Open in browser:**
-   - App automatically opens at `http://localhost:8501`
-   - If not, manually visit the URL shown in terminal
+Windows
 
-5. **Use the app:**
-   - Click "Browse files" to upload music file (`.wav`, `.mp3`, `.ogg`, `.flac`)
-   - Click "🎯 Classify Genre" button
-   - See prediction results with confidence scores!
+```bash
+.\venv\Scripts\Activate.ps1
+```
 
-### Option 2: Train Your Own Model
+macOS/Linux
 
-1. **Open Google Colab:**
-   - Go to [Google Colab](https://colab.research.google.com)
-   - Upload `music-genre-classification.ipynb`
+```bash
+source venv/bin/activate
+```
 
-2. **Enable GPU:**
-   - Runtime → Change runtime type → Hardware accelerator → GPU
+3️⃣ **Start the app**
 
-3. **Upload Kaggle API Key:**
-   - When prompted, upload your `kaggle.json` file
-   - Notebook will auto-download GTZAN dataset
+```bash
+streamlit run app.py
+```
 
-4. **Run All Cells:**
-   - Click Runtime → Run all
-   - Training takes ~20-30 minutes on GPU
+4️⃣ **Open in browser**
 
-5. **Download Model:**
-   - Download `music_genre_classifier_model.h5`
-   - Download `label_encoder.pkl`
-   - Place both files in `music-genre-classifier/` folder
+The app automatically opens at:
+
+```
+http://localhost:8501
+```
+
+5️⃣ **Use the app**
+
+- Upload music file (`.wav`, `.mp3`, `.ogg`, `.flac`)
+- Click **🎯 Classify Genre**
+- See prediction results instantly
 
 ---
 
-## 📁 Project Structure
+## Option 2: Train Your Own Model
+
+1️⃣ Open **Google Colab**
+
+https://colab.research.google.com
+
+Upload:
+
+```
+music-genre-classification.ipynb
+```
+
+2️⃣ Enable GPU
+
+Runtime → Change Runtime Type → GPU
+
+3️⃣ Upload Kaggle API Key
+
+Upload `kaggle.json` when prompted.
+
+4️⃣ Run All Cells
+
+Training takes **~20–30 minutes**.
+
+5️⃣ Download Model Files
+
+```
+music_genre_classifier_model.h5
+label_encoder.pkl
+```
+
+Place them in:
 
 ```
 music-genre-classifier/
-├── app.py                              # Streamlit web application
-├── music-genre-classification.ipynb    # Training notebook (Google Colab ready)
-├── music_genre_classifier_model.h5     # Pre-trained model
-├── label_encoder.pkl                   # Genre label encoder
-├── requirements_app.txt                # Python dependencies
-├── model_summary.txt                   # Model architecture details
-├── README.md                           # This file
-├── README_APP.md                       # Detailed app documentation
-└── USER_GUIDE.md                       # User guide
 ```
 
 ---
 
-## 🎨 Features
+# 📁 Project Structure
+
+```
+music-genre-classifier/
+│
+├── app.py
+├── music-genre-classification.ipynb
+├── music_genre_classifier_model.h5
+├── label_encoder.pkl
+├── requirements_app.txt
+├── model_summary.txt
+├── README.md
+├── README_APP.md
+└── USER_GUIDE.md
+```
+
+---
+
+# 🎨 Features
 
 ### Web Application
-- 🎨 Beautiful purple gradient UI
+
+- 🎨 Modern purple gradient UI
 - 🎯 Real-time genre classification
 - 📊 Interactive confidence charts
-- 🎵 Audio player to preview uploaded songs
-- 📈 Waveform and spectrogram visualizations
-- 🏆 Top 3 genre predictions with percentages
-- 🎼 Audio feature analysis (tempo, brightness, energy)
+- 🎵 Audio preview player
+- 📈 Waveform & spectrogram visualization
+- 🏆 Top 3 genre predictions
+- 🎼 Audio feature analysis
+
+---
 
 ### Model
-- **Architecture:** Bidirectional LSTM with Attention
-- **Input:** 58 audio features (MFCCs, spectral features, tempo, etc.)
+
+- **Architecture:** Bidirectional LSTM + Attention
+- **Input Features:** 58 audio features
 - **Output:** 10 genre probabilities
-- **Accuracy:** ~75-85% on test set
-- **Inference Time:** 1-2 seconds per song
+- **Accuracy:** ~75–85%
+- **Inference Time:** 1–2 seconds
 
 ---
 
-## 🐛 Troubleshooting
+# 🐛 Troubleshooting
 
-### Common Issues
+### pip install fails
 
-**Problem:** `pip install` fails
-- **Solution:** Upgrade pip: `python -m pip install --upgrade pip`
-
-**Problem:** "No module named 'streamlit'"
-- **Solution:** Activate virtual environment and reinstall: `pip install -r requirements_app.txt`
-
-**Problem:** "Error loading model"
-- **Solution:** Ensure `music_genre_classifier_model.h5` is in the same folder as `app.py`
-
-**Problem:** App doesn't open in browser
-- **Solution:** Manually open `http://localhost:8501` in your browser
-
-**Problem:** Execution policy error (Windows)
-- **Solution:** Run `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`
-
-**Problem:** Audio file not working
-- **Solution:** Convert to `.wav` format or ensure file is not corrupted
+```bash
+python -m pip install --upgrade pip
+```
 
 ---
 
-## 📚 Additional Resources
+### Streamlit module error
 
-- **Detailed App Guide:** See `README_APP.md`
-- **User Manual:** See `USER_GUIDE.md`
-- **Model Details:** See `model_summary.txt`
+```bash
+pip install -r requirements_app.txt
+```
 
 ---
 
-## 🤝 Contributing
+### Model loading error
 
-Contributions are welcome! Feel free to:
+Ensure these files exist:
+
+```
+music_genre_classifier_model.h5
+label_encoder.pkl
+```
+
+---
+
+### App not opening
+
+Open manually:
+
+```
+http://localhost:8501
+```
+
+---
+
+### Windows Execution Policy Error
+
+```powershell
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
+---
+
+### Audio file issue
+
+Convert to `.wav` format.
+
+---
+
+# 📚 Additional Resources
+
+- `README_APP.md` → Detailed app documentation  
+- `USER_GUIDE.md` → User guide  
+- `model_summary.txt` → Model architecture
+
+---
+
+# 🤝 Contributing
+
+Contributions are welcome!
+
+You can:
+
 - Report bugs
-- Suggest new features
-- Improve documentation
-- Add new genres
+- Improve UI
+- Add new music genres
+- Enhance model accuracy
 
 ---
 
-## 📄 License
+# 📄 License
 
-This project is for educational purposes. GTZAN dataset credit to original creators.
+This project is for **educational purposes**.
 
----
-
-## 🙏 Acknowledgments
-
-- **GTZAN Dataset** - Music genre classification dataset
-- **TensorFlow** - Deep learning framework
-- **Streamlit** - Web application framework
-- **Librosa** - Audio processing library
+GTZAN dataset credit goes to the original creators.
 
 ---
 
+# 🙏 Acknowledgments
 
+- **GTZAN Dataset**
+- **TensorFlow**
+- **Streamlit**
+- **Librosa**
+
+---
